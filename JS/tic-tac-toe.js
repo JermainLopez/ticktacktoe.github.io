@@ -1,4 +1,5 @@
 var gameList = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+var divList = ["div1", "div2",  "div3", "div4", "div5", "div6", "div7", "div8", "div9"];
 let activerifyIfPlayerWinn = false;
 let activation = false;
 let count = 0;
@@ -6,14 +7,26 @@ let countPlayer1 = 0;
 let countPlayer2 = 0;
 var player = "Player O";
 
-
+//
 function addNumbers(option){
     if (activation == true){
-        document.querySelector('#container').innerText = player + ' WIN';
+        document.querySelector('#player').innerText = player + ' WIN';
     }else if (activation == "draw"){
-        document.querySelector('#container').innerText = 'NO PLAYER HAS WON ';
+        document.querySelector('#player').innerText = 'NO PLAYER HAS WON ';
     }else{
         setGamePlayer(option, player);
+        if (activation == true){
+            document.querySelector('#player').innerText = player + ' WIN';
+            if (player == "Player O"){
+                countPlayer1 = countPlayer1 + 1;
+                document.querySelector('#score3').innerText = countPlayer1;
+            }else{ 
+                countPlayer2 = countPlayer2 + 1;
+                document.querySelector('#score4').innerText = countPlayer2 ;
+            }
+        
+        }
+        
     }
 
 }
@@ -86,11 +99,6 @@ var changePlayerToOtherPlayer = (next) => {
 };
 
 
-
-
-
-
-
 function verifyIfPlayerWinn(list, temp){
     let winn = false;
     if ((temp)< 8){
@@ -112,4 +120,15 @@ function verifyIfPlayerWinn(list, temp){
         }
     return winn;
 
+}
+
+function playAgain(){
+    for (var i = 0; i <= 8; i++){gameList[i] = i + 1;}
+    for (var j = 0; j <= 8; j++) {document.getElementById(divList[j]).innerHTML = ''; }
+    document.getElementById('player-reset').innerHTML = 'Play Again';
+    document.getElementById('player').innerHTML = 'PLayer O';
+    activerifyIfPlayerWinn = false;
+    activation = false;
+    count = 0;
+    player = "Player O";
 }
